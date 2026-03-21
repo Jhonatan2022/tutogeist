@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/tutogeist/static/css/main.8fc01e13.css",
-    "main.js": "/tutogeist/static/js/main.dbd3ed2d.js",
-    "static/media/tutorgeist_logo.png": "/tutogeist/static/media/tutorgeist_logo.f63b95640e68a1501b41.png",
-    "index.html": "/tutogeist/index.html",
-    "main.8fc01e13.css.map": "/tutogeist/static/css/main.8fc01e13.css.map",
-    "main.dbd3ed2d.js.map": "/tutogeist/static/js/main.dbd3ed2d.js.map"
+    "main.css": "/static/css/main.8fc01e13.css",
+    "main.js": "/static/js/main.b4c228c8.js",
+    "static/media/tutorgeist_logo.png": "/static/media/tutorgeist_logo.f63b95640e68a1501b41.png",
+    "index.html": "/index.html",
+    "main.8fc01e13.css.map": "/static/css/main.8fc01e13.css.map",
+    "main.b4c228c8.js.map": "/static/js/main.b4c228c8.js.map"
   },
   "entrypoints": [
     "static/css/main.8fc01e13.css",
-    "static/js/main.dbd3ed2d.js"
+    "static/js/main.b4c228c8.js"
   ]
 }
