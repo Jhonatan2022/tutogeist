@@ -2,7 +2,7 @@
   "name": "tutogeist",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://Jhonatan2022.github.io/tutogeist",
+  "homepage": "/",
   "dependencies": {
     "@supabase/supabase-js": "^2.99.3",
     "react": "^18.2.0",
