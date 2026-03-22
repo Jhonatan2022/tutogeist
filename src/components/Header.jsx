@@ -1,7 +1,6 @@
 import React from 'react';
-import LogoIcon from './LogoIcon';
 
-const Header = ({ theme, toggleTheme }) => {
+const Header = ({ theme, toggleTheme, onLogout }) => {
   return (
     <header className="header">
       <div className="logo">
@@ -36,6 +35,13 @@ const Header = ({ theme, toggleTheme }) => {
           Exportar
           <span>↑</span>
         </button>
+
+        {onLogout && (
+          <button className="logout-btn" onClick={onLogout} title="Cerrar sesión">
+            <span className="logout-icon">⏻</span>
+            <span className="logout-text">Salir</span>
+          </button>
+        )}
       </div>
     </header>
   );

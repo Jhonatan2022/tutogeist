@@ -445,3 +445,45 @@
     display: none;
   }
 }
+
+
+/* ===== LOGOUT BUTTON ===== */
+.logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: transparent;
+  color: var(--teal-dark);
+  border: 2px solid var(--teal-primary);
+  padding: 7px 16px;
+  border-radius: var(--border-radius-btn);
+  font-size: 0.875rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: var(--font-heading);
+  transition: var(--transition);
+}
+
+.logout-btn:hover {
+  background: var(--teal-primary);
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-btn);
+}
+
+.logout-icon {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+/* Dark mode */
+[data-theme="dark"] .logout-btn {
+  color: var(--teal-light);
+  border-color: var(--teal-light);
+}
+
+[data-theme="dark"] .logout-btn:hover {
+  background: var(--teal-primary);
+  color: white;
+  border-color: var(--teal-primary);
+}
