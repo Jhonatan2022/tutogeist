@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/static/css/main.5ddf4043.css",
+    "main.css": "/static/css/main.354ce2bc.css",
     "main.js": "/static/js/main.8cc28c05.js",
     "static/media/tutorgeist_logo.png": "/static/media/tutorgeist_logo.f63b95640e68a1501b41.png",
     "index.html": "/index.html",
-    "main.5ddf4043.css.map": "/static/css/main.5ddf4043.css.map",
+    "main.354ce2bc.css.map": "/static/css/main.354ce2bc.css.map",
     "main.8cc28c05.js.map": "/static/js/main.8cc28c05.js.map"
   },
   "entrypoints": [
-    "static/css/main.5ddf4043.css",
+    "static/css/main.354ce2bc.css",
     "static/js/main.8cc28c05.js"
   ]
 }
