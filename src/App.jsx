@@ -12,19 +12,18 @@ function App() {
   const [activeItem, setActiveItem] = useState('Ai Chat');
   const [session, setSession] = useState(null);
   const [loadingAuth, setLoadingAuth] = useState(true);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
 
   useEffect(() => {
-    // Verificar sesión activa al cargar
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
       setLoadingAuth(false);
     });
 
-    // Escuchar cambios de sesión
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
     });
@@ -33,13 +32,8 @@ function App() {
   }, []);
 
   const toggleTheme = (newTheme) => setTheme(newTheme);
-
-  const handleNewChat = () => setActiveItem('Ai Chat');
-
-  const handleLogout = async () => {
-    await supabase.auth.signOut();
-    setSession(null);
-  };
+  const handleNewChat = () => { setActiveItem('Ai Chat'); setMenuOpen(false); };
+  const handleLogout = async () => { await supabase.auth.signOut(); setSession(null); };
 
   if (loadingAuth) {
     return (
@@ -49,19 +43,28 @@ function App() {
     );
   }
 
-  if (!session) {
-    return <Login onLogin={() => {}} />;
-  }
+  if (!session) return <Login onLogin={() => {}} />;
 
   return (
     <div className="app-wrapper">
       <div className="app-container">
-        <Header theme={theme} toggleTheme={toggleTheme} onLogout={handleLogout} />
+        <Header
+          theme={theme}
+          toggleTheme={toggleTheme}
+          onLogout={handleLogout}
+          onMenuToggle={() => setMenuOpen(!menuOpen)}
+        />
         <div className="main-content">
+          {/* Overlay oscuro al abrir menú */}
+          {menuOpen && (
+            <div className="sidebar-overlay" onClick={() => setMenuOpen(false)} />
+          )}
+
           <Sidebar
             onNewChat={handleNewChat}
             activeItem={activeItem}
-            setActiveItem={setActiveItem}
+            setActiveItem={(item) => { setActiveItem(item); setMenuOpen(false); }}
+            menuOpen={menuOpen}
           />
           <ChatArea key={activeItem} />
         </div>

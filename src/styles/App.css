@@ -487,3 +487,125 @@
   color: white;
   border-color: var(--teal-primary);
 }
+
+
+/* 1. ESTILOS BASE (Fuera de Media Queries) */
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hamburger-btn {
+  display: none; /* Oculto en PC */
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  padding: 6px;
+  border-radius: 8px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.hamburger-btn:hover {
+  background: rgba(45, 171, 185, 0.1);
+}
+
+.hamburger-btn span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--teal-primary);
+  border-radius: 2px;
+  transition: var(--transition);
+}
+
+.sidebar-overlay {
+  display: none; /* Se activa por React/Media Query */
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 99;
+}
+
+/* 2. RESPONSIVE MOBILE (Un solo bloque limpio) */
+@media (max-width: 768px) {
+  .app-wrapper {
+    padding: 0;
+    align-items: flex-start;
+  }
+
+  .app-container {
+    border-radius: 0;
+    height: 100vh;
+  }
+
+  /* Muestra el botón de hamburguesa */
+  .hamburger-btn {
+    display: flex;
+  }
+
+  /* Configuración de Sidebar Flotante */
+  .sidebar {
+    display: flex; /* IMPORTANTE: No usar 'none' */
+    position: fixed;
+    top: 0;
+    left: -100%; /* Escondida por defecto */
+    height: 100vh;
+    width: 280px;
+    z-index: 1000;
+    transition: left 0.3s ease;
+    box-shadow: 4px 0 20px rgba(0,0,0,0.15);
+    padding-top: 80px;
+    background: var(--bg-sidebar); 
+    overflow-y: auto;
+  }
+
+  /* Cuando React añade la clase 'open' */
+  .sidebar.open {
+    left: 0;
+  }
+
+  /* Mostrar overlay solo cuando sea necesario */
+  .sidebar-overlay {
+    display: block;
+  }
+
+  /* Ajustes de UI en móvil */
+  .header {
+    padding: 10px 14px;
+  }
+
+  .header-config, .export-btn {
+    display: none;
+  }
+
+  .logo img {
+    height: 60px !important;
+  }
+
+  .chat-area {
+    width: 100%;
+  }
+
+  .chat-messages {
+    padding: 16px 14px;
+  }
+
+  .message-user .msg-content,
+  .message-bot .msg-wrapper {
+    max-width: 90%;
+  }
+
+  .chat-input-area {
+    padding: 10px 12px 14px;
+  }
+
+  .chat-decoration {
+    display: none; /* Mejor ocultarla en móvil para ahorrar espacio */
+  }
+}

@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 const navItems = ['Ai Chat', 'Generador de imagen', 'Generador de código', 'Historial', 'Biblioteca'];
 const materias = ['Creación de empresas', 'Virtual English', 'Matemáticas', 'Historia Universal'];
 
-const Sidebar = ({ onNewChat, activeItem, setActiveItem }) => {
+const Sidebar = ({ onNewChat, activeItem, setActiveItem, menuOpen }) => {
   return (
-    <aside className="sidebar">
+    <aside className={`sidebar ${menuOpen ? 'open' : ''}`}>
       <button className="new-chat-btn" onClick={onNewChat}>
         <span>+</span>
         Nuevo Chat

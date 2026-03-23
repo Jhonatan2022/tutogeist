@@ -1,14 +1,21 @@
 import React from 'react';
 
-const Header = ({ theme, toggleTheme, onLogout }) => {
+const Header = ({ theme, toggleTheme, onLogout, onMenuToggle }) => {
   return (
     <header className="header">
-      <div className="logo">
-        <img
-          src={require('../assets/tutorgeist_logo.png')}
-          alt="TutorGeist"
-          style={{ height: '120px', objectFit: 'contain' }}
-        />
+      <div className="header-left">
+        <button className="hamburger-btn" onClick={onMenuToggle} title="Menú">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <div className="logo">
+          <img
+            src={require('../assets/tutorgeist_logo.png')}
+            alt="TutorGeist"
+            style={{ height: '120px', objectFit: 'contain' }}
+          />
+        </div>
       </div>
 
       <div className="header-actions">
@@ -32,8 +39,7 @@ const Header = ({ theme, toggleTheme, onLogout }) => {
         </div>
 
         <button className="export-btn">
-          Exportar
-          <span>↑</span>
+          Exportar <span>↑</span>
         </button>
 
         {onLogout && (
