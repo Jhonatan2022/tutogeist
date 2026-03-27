@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { supabase } from '../supabase';
 import '../styles/Login.css';
 
-const Login = ({ onLogin }) => {
+const Login = ({ onLogin, onBackToLanding }) => {
   const [isRegister, setIsRegister] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -23,13 +23,26 @@ const Login = ({ onLogin }) => {
     }
 
     if (isRegister) {
-      const { error } = await supabase.auth.signUp({
+      const { data, error } = await supabase.auth.signUp({
         email,
         password,
         options: { data: { full_name: fullName } }
       });
-      if (error) setError(error.message);
-      else setMessage('¡Registro exitoso! Revisa tu correo para confirmar.');
+      if (error) {
+        setError(error.message);
+      } else {
+        // Create profile row with auto-generated avatar
+        if (data.user) {
+          const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(fullName || email)}&size=200&background=4c4eb3&color=fff&bold=true&rounded=true`;
+          await supabase.from('profiles').upsert({
+            id: data.user.id,
+            email: email,
+            full_name: fullName,
+            avatar_url: avatarUrl,
+          });
+        }
+        setMessage('¡Registro exitoso! Revisa tu correo para confirmar.');
+      }
     } else {
       const { error } = await supabase.auth.signInWithPassword({ email, password });
       if (error) setError('Correo o contraseña incorrectos.');
@@ -55,8 +68,18 @@ const Login = ({ onLogin }) => {
 
         {/* Panel izquierdo */}
         <div className="login-left">
+          {/* Botón volver */}
+          {onBackToLanding && (
+            <button
+              className="login-back-btn"
+              onClick={onBackToLanding}
+            >
+              ← Volver al inicio
+            </button>
+          )}
+
           <div className="login-logo">
-            <img src={require('../assets/tutorgeist_logo.png')} alt="TutorGeist" />
+            <img src={require('../assets/logo.png')} alt="TutorGeist" />
           </div>
 
           <h2 className="login-title">

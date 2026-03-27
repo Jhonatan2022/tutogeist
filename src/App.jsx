@@ -1,18 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import './styles/global.css';
 import './styles/App.css';
-import Header from './components/Header';
-import Sidebar from './components/Sidebar';
+import Header   from './components/Header';
+import Sidebar  from './components/Sidebar';
 import ChatArea from './components/ChatArea';
-import Login from './pages/Login';
+import Login    from './pages/Login';
+import LandingPage from './pages/landing/LandingPage';
 import { supabase } from './supabase';
 
 function App() {
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme]           = useState('light');
   const [activeItem, setActiveItem] = useState('Ai Chat');
-  const [session, setSession] = useState(null);
+  const [session, setSession]       = useState(null);
   const [loadingAuth, setLoadingAuth] = useState(true);
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [view, setView]             = useState('landing');
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
@@ -23,48 +24,66 @@ function App() {
       setSession(session);
       setLoadingAuth(false);
     });
-
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
+      if (session) setView('landing');
     });
-
     return () => subscription.unsubscribe();
   }, []);
 
-  const toggleTheme = (newTheme) => setTheme(newTheme);
-  const handleNewChat = () => { setActiveItem('Ai Chat'); setMenuOpen(false); };
-  const handleLogout = async () => { await supabase.auth.signOut(); setSession(null); };
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    setSession(null);
+    setView('landing');
+  };
 
   if (loadingAuth) {
     return (
-      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--bg-app)' }}>
-        <p style={{ color: 'white', fontFamily: 'var(--font-body)' }}>Cargando...</p>
+      <div style={{
+        minHeight: '100vh', display: 'flex', alignItems: 'center',
+        justifyContent: 'center',
+        background: 'linear-gradient(135deg, #1a1a3e 0%, #0f3460 40%, #377e80 100%)',
+      }}>
+        <p style={{ color: 'white', fontFamily: 'Poppins, sans-serif', fontSize: '1.1rem' }}>
+          Cargando TutorGeist...
+        </p>
       </div>
     );
   }
 
-  if (!session) return <Login onLogin={() => {}} />;
+  if (view === 'landing') {
+    return (
+      <LandingPage
+        session={session}
+        onGoToApp={() => setView('app')}
+        onGoToLogin={() => setView('login')}
+      />
+    );
+  }
+
+  if (view === 'login') {
+    return (
+      <Login
+        onLogin={() => setView('landing')}
+        onBackToLanding={() => setView('landing')}
+      />
+    );
+  }
 
   return (
     <div className="app-wrapper">
       <div className="app-container">
         <Header
           theme={theme}
-          toggleTheme={toggleTheme}
+          toggleTheme={(t) => setTheme(t)}
           onLogout={handleLogout}
-          onMenuToggle={() => setMenuOpen(!menuOpen)}
+          onBackToLanding={() => setView('landing')}
         />
         <div className="main-content">
-          {/* Overlay oscuro al abrir menú */}
-          {menuOpen && (
-            <div className="sidebar-overlay" onClick={() => setMenuOpen(false)} />
-          )}
-
           <Sidebar
-            onNewChat={handleNewChat}
+            onNewChat={() => setActiveItem('Ai Chat')}
             activeItem={activeItem}
-            setActiveItem={(item) => { setActiveItem(item); setMenuOpen(false); }}
-            menuOpen={menuOpen}
+            setActiveItem={setActiveItem}
           />
           <ChatArea key={activeItem} />
         </div>

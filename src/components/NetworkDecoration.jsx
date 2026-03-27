@@ -1,5 +1,3 @@
-import React from 'react';
-
 const NetworkDecoration = () => (
   <svg
     className="chat-decoration"

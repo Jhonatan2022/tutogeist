@@ -145,7 +145,7 @@
 
 .welcome-subtitle {
   font-size: 0.9rem;
-  color: rgba(255,255,255,0.85);
+  color: rgba(255, 255, 255, 0.85);
   margin-bottom: 32px;
   line-height: 1.6;
 }
@@ -197,4 +197,21 @@
   .login-left {
     padding: 32px 24px;
   }
+}
+
+.login-back-btn {
+  align-self: flex-start;
+  margin-bottom: 12px;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.login-back-btn:hover {
+  color: var(--teal-primary);
 }
