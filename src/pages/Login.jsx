@@ -74,7 +74,7 @@ const Login = ({ onLogin, onBackToLanding }) => {
               className="login-back-btn"
               onClick={onBackToLanding}
             >
-              ← Volver al inicio
+              ← Volver
             </button>
           )}
 
