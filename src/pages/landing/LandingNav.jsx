@@ -5,7 +5,7 @@ const getAvatarUrl = (name, size = 80) =>
 
 const LandingNav = ({
   lang, setLang, t, session, profile,
-  onGoToLogin, onGoToApp, onShowProfile, onLogout,
+  onGoToLogin, onGoToApp, onShowProfile, onLogout, onGoToDashboard,
 }) => {
   const [scrolled, setScrolled]     = useState(false);
   const [menuOpen, setMenuOpen]     = useState(false);
@@ -104,6 +104,11 @@ const LandingNav = ({
                   <button onClick={() => { onGoToApp(); setUserMenuOpen(false); }}>
                     🤖 {t.nav.goToAI}
                   </button>
+                  {profile?.role === 'instructor' && (
+                    <button onClick={() => { onGoToDashboard(); setUserMenuOpen(false); }}>
+                      📊 Mi Dashboard
+                    </button>
+                  )}
                   <hr />
                   <button className="tg-user__logout" onClick={onLogout}>
                     ↩ {t.nav.logout}

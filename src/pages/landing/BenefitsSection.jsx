@@ -11,30 +11,6 @@ const BenefitsSection = ({ t, session, onGoToLogin, onGoToApp }) => (
 
         <div className="tg-plans">
 
-          {/* Card Esencial */}
-          <div className="tg-plan">
-            <div className="tg-plan__header">
-              <h3 className="tg-plan__name">{t.benefits.card1.name}</h3>
-              <div className="tg-plan__price">
-                <span className="tg-plan__amount">—</span>
-              </div>
-              <p className="tg-plan__desc">{t.benefits.card1.desc}</p>
-            </div>
-            <ul className="tg-plan__features">
-              {t.benefits.card1.features.map((f, i) => (
-                <li key={i}>
-                  <span className="tg-plan__check">✓</span>{f}
-                </li>
-              ))}
-            </ul>
-            <button
-              className="tg-btn tg-btn--plan"
-              onClick={session ? onGoToApp : onGoToLogin}
-            >
-              {t.benefits.card1.cta}
-            </button>
-          </div>
-
           {/* Card Pro — Destacada */}
           <div className="tg-plan tg-plan--featured">
             <div className="tg-plan__badge">{t.benefits.card2.badge}</div>
