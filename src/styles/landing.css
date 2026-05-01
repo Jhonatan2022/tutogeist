@@ -454,17 +454,20 @@
   width: 100%; max-width: 460px; position: relative;
   box-shadow: 0 24px 60px rgba(76,78,179,0.2);
   animation: modalIn 0.3s ease;
+  max-height: 90vh;
+  overflow-y: auto;
 }
 @keyframes modalIn {
   from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 .tg-modal__close {
-  position: absolute; top: 16px; right: 16px;
+  position: sticky; top: 0; float: right; margin-bottom: 8px;
   background: rgba(76,78,179,0.07); border: none; border-radius: 50%;
   width: 32px; height: 32px; cursor: pointer; font-size: 0.9rem;
   color: #6b7280; transition: all 0.2s ease;
   display: flex; align-items: center; justify-content: center;
+  z-index: 10;
 }
 .tg-modal__close:hover { background: rgba(76,78,179,0.12); color: #4c4eb3; }
 .tg-modal__title {

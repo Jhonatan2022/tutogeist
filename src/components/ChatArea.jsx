@@ -289,5 +289,5 @@ const ChatArea = ({ session, activeItem, exportRef }) => {
   );
 };
 
-// Exponemos handleExport para que el Header pueda llamarlo
+
 export { ChatArea as default };
